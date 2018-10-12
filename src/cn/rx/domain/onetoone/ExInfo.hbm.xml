@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--在实体类包下创建一个xml文件，名称建议为实体类名+.hbm+.xml 导入dtd约束-->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.rx.domain.onetoone">
+    <class name="ExInfo" table="exinfo">
+        <id name="pid" column="pid">
+            <!--实现主键自增长-->
+            <!--generator:是指定主键的生成方式，取值是固定的值之一
+                native是使用本地的数据库实现自增长能力
+            -->
+            <generator class="foreign">
+                <param name="property">persion</param>
+            </generator>
+        </id>
+        <property name="info" column="info"></property>
+        <one-to-one name="persion" class="Persion" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>

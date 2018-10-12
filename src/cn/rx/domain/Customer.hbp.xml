@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--在实体类包下创建一个xml文件，名称建议为实体类名+.hbm+.xml 导入dtd约束-->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.rx.domain">
+    <class name="Customer" table="cst_customer">
+        <id name="custId" column="cst_id">
+            <!--实现主键自增长-->
+            <!--generator:是指定主键的生成方式，取值是固定的值之一
+                native是使用本地的数据库实现自增长能力
+            --><generator class="native"></generator>
+        </id>
+        <property name="custName" column="cst_name"></property>
+        <property name="custSource" column="cst_source"></property>
+        <property name="CustIndustry" column="cst_industry"></property>
+        <property name="custLevel" column="cst_level"></property>
+        <property name="custAddress" column="cst_address"></property>
+        <property name="custPhone" column="cst_phone"></property>
+        <!--一对多关系映射：主表实体的关系映射配置
+             涉及的标签：
+                set：用于配置set集合属性
+                   属性 ：
+                    name：用于指定实体类中set集合的属性名称
+                    table:指定从表的名称，在一对多的时候可以不写
+                key:映射外键字段
+                   属性：
+                      column:指定外键名称字段
+                one-to-many:
+                   属性 ：用于建立一对多映射配置
+                       class：用于指定从表实体的名称
+        -->
+        <set name="linkMans" table="cst_linkman" inverse="false" cascade="save-update,delete-orphan">
+        <!--主表设置外键的原因是在单向一对多的时候，hibernate生成sql语句的依据-->
+        <key column="lkm_cust_id"></key>
+        <one-to-many  class="LinkMan" />
+    </set>
+    </class>
+</hibernate-mapping>

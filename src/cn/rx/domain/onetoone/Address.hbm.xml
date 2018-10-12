@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--在实体类包下创建一个xml文件，名称建议为实体类名+.hbm+.xml 导入dtd约束-->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.rx.domain.onetoone">
+    <class name="Address" table="address">
+        <id name="aid" column="aid">
+            <generator class="identity"></generator>
+        </id>
+        <property name="addr" column="addr"></property>
+        <!--一对一配置-->
+        <!--property-ref="company"这个属性现在不配置也可以-->
+        <!--unique="true" 保证映射时只有一个-->
+        <many-to-one name="company" column="cid" class="Company" unique="true"></many-to-one>
+    </class>
+</hibernate-mapping>

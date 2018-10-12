@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--导入配置约束-->
+<!DOCTYPE hibernate-configuration PUBLIC
+        "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <!--配置SessionFactory-->
+        <!--配置数据库连接-->
+        <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+        <property name="hibernate.connection.url">jdbc:mysql:///hibernatetest</property>
+        <property name="hibernate.connection.username">root</property>
+        <property name="hibernate.connection.password">root</property>
+        <!--配置数据库的方言-->
+        <property name="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</property>
+        <!--配置可选信息-->
+        <!--配置是否显示操作的sql语句-->
+        <property name="hibernate.show_sql">true</property>
+        <!--配置是否使用格式化的sql语句输出到控制台-->
+        <property name="hibernate.format_sql">true</property>
+        <!--检测实体类的映射配置与数据库表是否一致，不一致的话，更新表 会重复的更新表的外键-->
+        <!--<property name="hibernate.hbm2ddl.auto">update</property>-->
+        <!--配置数据源-->
+        <property name="hibernate.connection.provider_class">org.hibernate.c3p0.internal.C3P0ConnectionProvider</property>
+        <!--绑定线程-->
+        <property name="hibernate.current_session_context_class">thread</property>
+        <!--配置映射文件-->
+        <!--<mapping resource="cn/rx/domain/SysUser.hbm.xml"></mapping>-->
+        <!--<mapping resource="cn/rx/domain/Role.hbm.xml"></mapping>-->
+        <mapping class="cn.rx.domain.User"></mapping>
+        <mapping class="cn.rx.domain.Orders"></mapping>
+        <!--<mapping resource="cn/rx/domain/onetoone/Address.hbm.xml"></mapping>-->
+        <!--<mapping resource="cn/rx/domain/onetoone/Company.hbm.xml"></mapping>-->
+        <mapping resource="cn/rx/domain/onetoone/ExInfo.hbm.xml"></mapping>
+        <mapping resource="cn/rx/domain/onetoone/Persion.hbm.xml"></mapping>
+    </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--导入dtd约束-->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!--设置代理主键-->
+<hibernate-mapping package="cn.rx.domain">
+    <class name="Role" table="sys_role">
+        <id name="roleId" column="sys_roleId">
+            <generator class="native"></generator>
+        </id>
+        <property name="roleName" column="sys_roleName"></property>
+        <property name="roleMemo" column="sys_roleMemo"></property>
+        <set name="users" table="user_role_ref">
+            <key column="sys_roleId"></key>
+            <many-to-many class="SysUser" column="sys_userId"></many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>

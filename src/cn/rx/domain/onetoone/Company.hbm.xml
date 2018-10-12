@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--在实体类包下创建一个xml文件，名称建议为实体类名+.hbm+.xml 导入dtd约束-->
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="cn.rx.domain.onetoone">
+    <class name="Company" table="company">
+        <id name="cid" column="cid">
+            <!--实现主键自增长-->
+            <!--generator:是指定主键的生成方式，取值是固定的值之一
+                native是使用本地的数据库实现自增长能力
+            -->
+            <generator class="identity"></generator>
+        </id>
+        <property name="name" column="name"></property>
+        <!--一对一配置-->
+        <!--property-ref="company"这个属性现在不配置也可以 对付老旧的数据库系统，针对那些外键没有
+        对应到主表的主键的那种情况-->
+        <one-to-one name="address" class="Address" cascade="all-delete-orphan"></one-to-one>
+    </class>
+</hibernate-mapping>
